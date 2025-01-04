@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment Review</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: wheat;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .review-container {
+            width: 100%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .main-content {
+            flex: 2;
+            padding: 10px;
+        }
+
+        .head {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .main {
+            font-size: 28px;
+            margin: 0 auto;
+        }
+
+        .mmhs {
+            font-size: 28px;
+            font-style: italic;
+            position: absolute;
+            right: 0;
+            color: #fc3535;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #f8f8f8;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #eeeeee;
+        }
+
+        th input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        td input[type="checkbox"] {
+            display: block;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+
+        .buttons-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .saveBtn, .downloadBtn {
+            width: 48%;
+            height: 40px;
+            background: #84d8ff;
+            border: none;
+            outline: none;
+            border-radius: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+            cursor: pointer;
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .saveBtn:hover, .downloadBtn:hover {
+            background-color: #3cbefb;
+        }
+
+        .downloadBtn {
+            background: #007BFF;
+            color: white;
+        }
+
+        .downloadBtn:hover {
+            background-color: #0056b3;
+        }
+
+        .dropzone {
+            flex: 1;
+            min-width: 200px;
+            padding: 20px;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            background-color: #fafafa;
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .dropzone:hover {
+            border-color: #84d8ff;
+            color: #333;
+        }
+
+        .icons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .icons i {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .review-container {
+                flex-direction: column;
+            }
+
+            .dropzone {
+                margin-top: 20px;
+                width: 100%;
+            }
+
+            .saveBtn, .downloadBtn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .buttons-row {
+                flex-direction: column;
+            }
+
+            .icons {
+                top: 10px;
+                right: 10px;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="review-container">
+        <div class="main-content">
+            <div class="head">
+                <h1 class="main">Assignment 6</h1>
+                <h1 class="mmhs">MMHS</h1>
+            </div>
+            <!-- Фильтр по оценке -->
+            <div style="margin-bottom: 10px;">
+                <label for="gradeFilter">Filter by Grade: </label>
+                <select id="gradeFilter" onchange="filterByGrade()">
+                    <option value="all">All</option>
+                    <option value="no-grade">No Grade</option>
+                    <option value="1-2">1.0 - 2.0</option>
+                    <option value="2-3">2.1 - 3.0</option>
+                    <option value="3-4">3.1 - 4.0</option>
+                </select>
+            </div>
+            <table id="studentsTable">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th id="gradeHeader">Grade</th>
+                        <th>Comment</th>
+                        <th>
+                            <input type="checkbox" id="selectAll">
+                            <label for="selectAll" style="font-size: 12px; margin-left: 5px; cursor: pointer;">Download</label>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Студенты будут добавляться через JavaScript -->
+                </tbody>
+            </table>
+            <div class="buttons-row">
+                <button class="saveBtn" id="saveBtn">Save</button>
+                <button class="downloadBtn" id="downloadBtn">Download Selected</button>
+            </div>
+        </div>
+        <div class="dropzone" id="dropzone">
+            Drag & Drop corrected files here
+        </div>
+    </div>
+
+    <!-- Иконки поиска и профиля -->
+    <div class="icons">
+        <i class="fas fa-search"></i> <!-- Иконка поиска -->
+        <i class="fas fa-user"></i> <!-- Иконка профиля -->
+    </div>
+
+    <script src="tutorCorPageScript.js"></script>
+</body>
+</html>
