@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+    <style>
+        body {
+            background-color: wheat;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .course-list {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+        }
+        .course-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .course-list li:hover {
+            background-color: #f1f1f1;
+        }
+        .course-list .comment {
+            font-size: 14px;
+            color: #555;
+        }
+        .course-list a {
+            text-decoration: none;
+            color: black;
+        }
+        .course-list a:hover {
+            text-decoration: underline;
+        }
+        .course-list .comment.completed {
+            color: green;
+        }
+        .course-list .comment.pending {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+    <h1>Courses</h1>
+    <ul class="course-list" id="courseList">
+        <!-- Courses will be dynamically added here -->
+    </ul>
+
+    <script>
+        const courses = [
+            {
+                id: 1,
+                name: "Grundlagen der Mensch-Computer-Interaktion",
+                dueDate: "2025-01-12",
+                completed: false
+            },
+            {
+                id: 2,
+                name: "Grundlagen der IT-Sicherheit",
+                dueDate: "2025-01-10",
+                completed: false
+            },
+            {
+                id: 3,
+                name: "Grundlagen digitaler Systeme",
+                dueDate: "2024-12-19",
+                completed: true
+            },
+            {
+                id: 4,
+                name: "Grundlagen der Softwaretechnik",
+                dueDate: "2025-01-06",
+                completed: true
+            }
+        ];
+
+        const courseList = document.getElementById("courseList");
+
+        // Kommentare formatieren
+        function getComment(dueDate, completed) {
+            if (completed) {
+                return { text: `Due Date: ${dueDate}, all assignments corrected`, className: 'completed' };
+            } else {
+                return { text: `Due Date: ${dueDate}, correction(s) left`, className: 'pending' };
+            }
+        }
+
+        // Kurse hinzufügen
+        courses.forEach(course => {
+            const li = document.createElement("li");
+
+            // Kurslink
+            const link = document.createElement("a");
+            link.textContent = course.name;
+            link.href = `course.html?id=${course.id}`; // zur Kursseite navigieren
+            link.target = "_self"; // im selben Fenster öffnen
+
+            // Kommentar
+            const commentData = getComment(course.dueDate, course.completed);
+            const comment = document.createElement("span");
+            comment.className = `comment ${commentData.className}`;
+            comment.textContent = commentData.text;
+
+            // zur Liste hinzufügen
+            li.appendChild(link);
+            li.appendChild(comment);
+            courseList.appendChild(li);
+        });
+    </script>
+</body>
+</html>
