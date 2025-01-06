@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Page Prototype</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: wheat;
+        }
+
+        .container {
+            width: 500px;
+            background: rgb(235, 235, 235);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .container h1 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .file-upload {
+            margin-bottom: 15px;
+        }
+
+        .file-upload label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .file-upload input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .buttons button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .buttons .confirm {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .buttons .cancel {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            font-size: 1em;
+            color: #333;
+        }
+
+        .feedback.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="student-upload">
+    <h1>Assignment #5</h1>
+    <div class="file-upload">
+        <label for="file">Upload your solution:</label>
+        <input type="file" id="file" />
+    </div>
+    <div class="buttons">
+        <button class="confirm" onclick="confirmUpload()">Confirm</button>
+        <button class="cancel" onclick="cancelUpload()">Cancel</button>
+    </div>
+    <div class="feedback hidden" id="feedback"></div>
+</div>
+
+<script>
+    function confirmUpload() {
+        const fileInput = document.getElementById('file');
+        const feedback = document.getElementById('feedback');
+        if (fileInput.files.length > 0) {
+            feedback.textContent = `File "${fileInput.files[0].name}" uploaded successfully!`;
+            feedback.classList.remove('hidden');
+        } else {
+            feedback.textContent = "No file selected. Please choose a file to upload.";
+            feedback.classList.remove('hidden');
+        }
+    }
+
+    function cancelUpload() {
+        const fileInput = document.getElementById('file');
+        const feedback = document.getElementById('feedback');
+        fileInput.value = "";
+        feedback.textContent = "File upload canceled.";
+        feedback.classList.remove('hidden');
+    }
+</script>
+
+</body>
+</html>
