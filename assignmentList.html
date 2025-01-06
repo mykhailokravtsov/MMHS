@@ -51,7 +51,6 @@
 <body>
     <h1>Assignments</h1>
     <ul class="assignment-list" id="assignmentList">
-        <!-- Assignments will be dynamically added here -->
     </ul>
 
     <script>
@@ -84,7 +83,6 @@
 
         const assignmentList = document.getElementById("assignmentList");
 
-        // Kommentare formatieren
         function getComment(dueDate, completed) {
             if (completed) {
                 return { text: `Due Date: ${dueDate}, all assignments corrected`, className: 'completed' };
@@ -93,29 +91,25 @@
             }
         }
 
-        // Kurse hinzufügen
         assignments.forEach(assignment => {
     const li = document.createElement("li");
 
-    // Kurslink
     const link = document.createElement("a");
     link.textContent = assignment.name;
 
-    // Überprüfen Sie, ob es sich um den speziellen Kurs handelt
+    // Überprüfe, ob es sich um das vorbestimmte Assignment für den Erfolgsfall handelt
     if (assignment.id === 4) {
-        link.href = "tutorCorectionPage.html"; // für diesen Kurs spezifisch
+        link.href = "tutorCorectionPage.html";
     } else {
-        link.href = `assignmentList.html?id=${assignment.id}`; // Standardlink für andere Kurse
+        link.href = `assignment.html?id=${assignment.id}`; // Standardlink für andere Assignments (nicht implementiert)
     }
-    link.target = "_self"; // im selben Fenster öffnen
+    link.target = "_self";
 
-    // Kommentar
     const commentData = getComment(assignment.dueDate, assignment.completed);
     const comment = document.createElement("span");
     comment.className = `comment ${commentData.className}`;
     comment.textContent = commentData.text;
 
-    // zur Liste hinzufügen
     li.appendChild(link);
     li.appendChild(comment);
     assignmentList.appendChild(li);
