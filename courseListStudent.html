@@ -108,25 +108,31 @@
 
         // Kurse hinzufügen
         courses.forEach(course => {
-            const li = document.createElement("li");
+        const li = document.createElement("li");
 
-            // Kurslink
-            const link = document.createElement("a");
-            link.textContent = course.name;
-            link.href = `course.html?id=${course.id}`; // zur Kursseite navigieren
-            link.target = "_self"; // im selben Fenster öffnen
+        // Kurslink
+        const link = document.createElement("a");
+        link.textContent = course.name;
 
-            // Kommentar
-            const commentData = getComment(course.dueDate, course.completed);
-            const comment = document.createElement("span");
-            comment.className = `comment ${commentData.className}`;
-            comment.textContent = commentData.text;
+        // Überprüfen Sie, ob es sich um den speziellen Kurs handelt
+        if (course.id === 1) {
+            link.href = "assignmentListStudent.html"; // für diesen Kurs spezifisch
+        } else {
+            link.href = `course.html?id=${course.id}`; // Standardlink für andere Kurse
+        }
+        link.target = "_self"; // im selben Fenster öffnen
 
-            // zur Liste hinzufügen
-            li.appendChild(link);
-            li.appendChild(comment);
-            courseList.appendChild(li);
-        });
+        // Kommentar
+        const commentData = getComment(course.dueDate, course.completed);
+        const comment = document.createElement("span");
+        comment.className = `comment ${commentData.className}`;
+        comment.textContent = commentData.text;
+
+        // zur Liste hinzufügen
+        li.appendChild(link);
+        li.appendChild(comment);
+        courseList.appendChild(li);
+    });
     </script>
 </body>
 </html>
