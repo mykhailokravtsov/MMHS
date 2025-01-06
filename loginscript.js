@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const usernameInput = document.getElementById("username");
     const passwordInput = document.getElementById("password");
 
-    let selectedRole = "";
+    let selectedRole = "student";
 
     function setActive(button, role) {
         tutorBtn.classList.remove("active");
@@ -23,14 +23,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     loginForm.addEventListener("submit", function (event) {
+        event.preventDefault(); 
 
         const username = usernameInput.value.trim();
         const password = passwordInput.value.trim();
 
         if (selectedRole === "student" && username === "student" && password === "student") {
-            alert("You are logined as student!");
+            window.location.href = 'courseListStudent.html';
         } else if (selectedRole === "tutor" && username === "tutor" && password === "tutor") {
-            alert("You are logined as tutor!");
+            window.location.href = 'courseListTutor.html';
         } else {
             alert("Wrong login or password!");
         }
