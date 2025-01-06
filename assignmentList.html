@@ -102,10 +102,10 @@
     link.textContent = assignment.name;
 
     // Überprüfen Sie, ob es sich um den speziellen Kurs handelt
-    if (assignment.id === 1) {
+    if (assignment.id === 4) {
         link.href = "tutorCorectionPage.html"; // für diesen Kurs spezifisch
     } else {
-        link.href = `assignment.html?id=${assignment.id}`; // Standardlink für andere Kurse
+        link.href = `assignmentList.html?id=${assignment.id}`; // Standardlink für andere Kurse
     }
     link.target = "_self"; // im selben Fenster öffnen
 
