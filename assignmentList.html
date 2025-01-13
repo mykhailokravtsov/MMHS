@@ -46,12 +46,28 @@
         .assignment-list .comment.pending {
             color: orange;
         }
+        .backButton {
+            margin: 20px auto; 
+            display: block; 
+            padding: 10px 20px; 
+            background: #3cbefb; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer;
+        }
+        .backButton:hover{
+            background-color: #00aeff;
+        }
     </style>
 </head>
 <body>
     <h1>Assignments</h1>
     <ul class="assignment-list" id="assignmentList">
     </ul>
+    <button class = "backButton" onclick="goBack()">
+        Back
+    </button>
 
     <script>
         const assignments = [
@@ -114,6 +130,9 @@
     li.appendChild(comment);
     assignmentList.appendChild(li);
 });
+        function goBack() {
+            window.history.back();
+        }
     </script>
 </body>
 </html>

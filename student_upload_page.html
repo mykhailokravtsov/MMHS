@@ -81,22 +81,39 @@
         .feedback.hidden {
             display: none;
         }
+        .backButton {
+            margin: 20px auto; 
+            display: block; 
+            padding: 10px 20px; 
+            background: #3cbefb; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer;
+        }
+        .backButton:hover{
+            background-color: #00aeff;
+        }
     </style>
 </head>
 <body>
 
 <div class="container" id="student-upload">
-    <h1>Assignment #4</h1>
+    <h1>Assignment #4 (GMCI)</h1>
     <div class="file-upload">
         <label for="file">Upload your solution:</label>
         <input type="file" id="file" />
     </div>
     <div class="buttons">
         <button class="confirm" onclick="confirmUpload()">Confirm</button>
+        <button class="backButton" onclick="goBack()">Back</button>
         <button class="cancel" onclick="cancelUpload()">Cancel</button>
+        
     </div>
     <div class="feedback hidden" id="feedback"></div>
 </div>
+
+
 
 <script>
     function confirmUpload() {
@@ -117,6 +134,9 @@
         fileInput.value = "";
         feedback.textContent = "File upload canceled.";
         feedback.classList.remove('hidden');
+    }
+    function goBack() {
+        window.history.back();
     }
 </script>
 

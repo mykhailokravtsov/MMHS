@@ -48,12 +48,29 @@
         .course-list .comment.pending {
             color: orange;
         }
+
+        .backButton {
+            margin: 20px auto; 
+            display: block; 
+            padding: 10px 20px; 
+            background: #3cbefb; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer;
+        }
+        .backButton:hover{
+            background-color: #00aeff;
+        }
     </style>
 </head>
 <body>
     <h1>Courses</h1>
     <ul class="course-list" id="courseList">
     </ul>
+    <button class = "backButton" onclick="goBack()">
+        Back
+    </button>
 
     <script>
         const courses = [
@@ -127,6 +144,9 @@
         li.appendChild(comment);
         courseList.appendChild(li);
     });
+        function goBack() {
+            window.history.back();
+        }
     </script>
 </body>
 </html>

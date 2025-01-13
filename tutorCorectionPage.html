@@ -149,6 +149,28 @@
             font-size: 24px;
             cursor: pointer;
         }
+        .backButton-container {
+            text-align: center; /* Center the button */
+            margin-top: 20px;
+        }
+
+        .backButton {
+            display: inline-block; 
+            padding: 12px 24px; 
+            background: #3cbefb; ; 
+            color: white;
+            font-size: 14px; 
+            border: none;
+            border-radius: 25px; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+            cursor: pointer;
+            
+        }
+
+
+        .backButton:hover {
+            background-color: #00aeff;
+        }
 
         @media (max-width: 768px) {
             .review-container {
@@ -174,6 +196,7 @@
                 right: 10px;
                 gap: 10px;
             }
+            
         }
     </style>
 </head>
@@ -181,7 +204,7 @@
     <div class="review-container">
         <div class="main-content">
             <div class="head">
-                <h1 class="main">Assignment 1</h1>
+                <h1 class="main">Assignment 4 (GMCI)</h1>
                 <h1 class="mmhs">MMHS</h1>
             </div>
             
@@ -211,9 +234,13 @@
                     
                 </tbody>
             </table>
+            
             <div class="buttons-row">
                 <button class="saveBtn" id="saveBtn">Save</button>
                 <button class="downloadBtn" id="downloadBtn">Download Selected</button>
+            </div>
+            <div class="backButton-container">
+                <button class="backButton" onclick="goBack()">Back</button>
             </div>
         </div>
         <div class="dropzone" id="dropzone">
