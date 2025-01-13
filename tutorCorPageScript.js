@@ -1,9 +1,9 @@
 
 let students = [
-    { name: "Thomas", grade: "3.3", comment: "Viele Fehler", file: "" },
-    { name: "Andrew", grade: "2.7", comment: "Zweite Teil ist falsch", file: "" },
-    { name: "Anna", grade: "-", comment: "", file: "" },
-    { name: "Elisa", grade: "1.3", comment: "Gut gemacht!", file: "" }
+    { name: "Thomas", grade: "3.3", comment: "Viele Fehler", index: 0,  file: "Thomas.pdf" },
+    { name: "Andrew", grade: "2.7", comment: "Zweite Teil ist falsch", index: 1,  file: "Andrew.pdf" },
+    { name: "Anna", grade: "-", comment: "", index: 2,  file: "Anna.pdf" },
+    { name: "Elisa", grade: "1.3", comment: "Gut gemacht!", index: 3, file: "Elisa.pdf" }
 ];
 
 let sortOrder = 'asc'; 
@@ -47,8 +47,8 @@ function displayStudents(filterGrade = 'all') {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${student.name}</td>
-            <td><input type="number" value="${student.grade}" onchange="updateGrade(${index}, event)"></td>
-            <td><input type="text" value="${student.comment}" onchange="updateComment(${index}, event)"></td>
+            <td><input type="text" value="${student.grade}" onchange="updateGrade(${student.index}, event)"></td>
+            <td><input type="text" value="${student.comment}" onchange="updateComment(${student.index}, event)"></td>
             <td><input type="checkbox" class="selectStudent" data-index="${index}"></td>
         `;
         tableBody.appendChild(row);
@@ -57,8 +57,13 @@ function displayStudents(filterGrade = 'all') {
 
 
 function updateGrade(index, event) {
-    students[index].grade = event.target.value;
-    displayStudents(document.getElementById('gradeFilter').value); 
+    if(event.target.value > 0){
+        students[index].grade = event.target.value;
+        displayStudents(document.getElementById('gradeFilter').value); 
+    } else {
+        alert(' Grade must be greater or equal to 0');
+        displayStudents(document.getElementById('gradeFilter').value); 
+    }
 }
 
 function updateComment(index, event) {
@@ -105,11 +110,29 @@ dropzone.addEventListener('dragover', function(event) {
 
 dropzone.addEventListener('drop', function(event) {
     event.preventDefault();
+
     const files = event.dataTransfer.files;
-    if (files.length > 0) {
-        alert('Files dropped!');
-       
-    }
+
+    const referenceFileName = "example.txt";
+
+    Array.from(files).forEach(file => {
+        var index = 0;
+        var matched = false;
+        students.forEach(student => {
+            
+            if (file.name === student.file) {
+                alert(`File ${file.name} matched with ${student.name}.`);
+                matched = true;
+                
+            }
+            index++;
+           
+
+        });
+        if(!matched) { 
+            alert(`No matches for ${file.name} `);
+        }
+    });
 });
 
 
