@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginForm = document.getElementById("login-form");
     const usernameInput = document.getElementById("username");
     const passwordInput = document.getElementById("password");
+    const passwordCheckbox = document.getElementById("showPassword");
+
 
     let selectedRole = "student";
 
@@ -36,4 +38,12 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Wrong login or password!");
         }
     });
+
+    passwordCheckbox.addEventListener("change", function(){
+        if(passwordCheckbox.checked){
+            passwordInput.type = "text";
+        }else{
+            passwordInput.type = "password";
+        }
+    })
 });

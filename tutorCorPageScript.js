@@ -144,3 +144,7 @@ document.getElementById('gradeHeader').addEventListener('click', function() {
 
 
 displayStudents();
+
+function goBack() {
+    window.history.back();
+}

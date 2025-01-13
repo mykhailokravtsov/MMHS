@@ -48,13 +48,29 @@
         .course-list .comment.pending {
             color: orange;
         }
+
+        .backButton {
+            margin: 20px auto; 
+            display: block; 
+            padding: 10px 20px; 
+            background: #3cbefb; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer;
+        }
+        .backButton:hover{
+            background-color: #00aeff;
+        }
     </style>
 </head>
 <body>
     <h1>Courses</h1>
     <ul class="course-list" id="courseList">
-        <!-- Courses will be dynamically added here -->
     </ul>
+    <button class = "backButton" onclick="goBack()">
+        Back
+    </button>
 
     <script>
         const courses = [
@@ -92,7 +108,6 @@
 
         const courseList = document.getElementById("courseList");
 
-        // Kommentare formatieren
         function getComment(dueDate, completed) {
             const currentDate = new Date();
             const deadline = new Date(dueDate);
@@ -106,33 +121,32 @@
             }
         }
 
-        // Kurse hinzufügen
         courses.forEach(course => {
         const li = document.createElement("li");
 
-        // Kurslink
         const link = document.createElement("a");
         link.textContent = course.name;
 
-        // Überprüfen Sie, ob es sich um den speziellen Kurs handelt
+        // Überprüfe, ob es sich um den speziellen Kurs für den Erfolgsfall handelt
         if (course.id === 1) {
-            link.href = "assignmentListStudent.html"; // für diesen Kurs spezifisch
+            link.href = "assignmentListStudent.html";
         } else {
-            link.href = `course.html?id=${course.id}`; // Standardlink für andere Kurse
+            link.href = `course.html?id=${course.id}`; // Standardlink für andere Kurse (nicht implementiert)
         }
-        link.target = "_self"; // im selben Fenster öffnen
+        link.target = "_self";
 
-        // Kommentar
         const commentData = getComment(course.dueDate, course.completed);
         const comment = document.createElement("span");
         comment.className = `comment ${commentData.className}`;
         comment.textContent = commentData.text;
 
-        // zur Liste hinzufügen
         li.appendChild(link);
         li.appendChild(comment);
         courseList.appendChild(li);
     });
+        function goBack() {
+            window.history.back();
+        }
     </script>
 </body>
 </html>
