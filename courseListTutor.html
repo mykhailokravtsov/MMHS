@@ -46,18 +46,26 @@
         .course-list .comment.pending {
             color: orange;
         }
-        .backButton {
-            margin: 20px auto; 
-            display: block; 
-            padding: 10px 20px; 
-            background: #3cbefb; 
-            color: white; 
-            border: none; 
-            border-radius: 5px; 
-            cursor: pointer;
+
+        .logout-container {
+            position: fixed;
+            top: 10px; 
+            right: 10px; 
+            z-index: 1000; 
         }
-        .backButton:hover{
-            background-color: #00aeff;
+        .logout-button {
+            background-color: #f44336; 
+            color: white; 
+            text-decoration: none; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            font-size: 16px; 
+            display: inline-block; 
+            transition: background-color 0.3s; 
+        }
+
+        .logout-button:hover {
+            background-color: #d32f2f;
         }
     </style>
 </head>
@@ -65,9 +73,10 @@
     <h1>Courses</h1>
     <ul class="course-list" id="courseList">
     </ul>
-    <button class = "backButton" onclick="goBack()">
-        Back
-    </button>
+
+    <div class="logout-container">
+        <a href="login.html" class="logout-button">Log out</a>
+    </div>
 
     <script>
         const courses = [
@@ -131,9 +140,7 @@
             courseList.appendChild(li);
         });
 
-        function goBack() {
-            window.history.back();
-        }
+        
     </script>
 </body>
 </html>
