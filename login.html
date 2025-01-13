@@ -117,6 +117,17 @@
             margin-right: 5px;
             cursor: pointer;
         }
+        .show-password{
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            margin-bottom: 15px;
+        }
+
+        .show-password input{
+            margin-right: 5px;
+            cursor: pointer;
+        }
 
         .loginBtn{
             width: 100%;
@@ -159,6 +170,10 @@
             <div class="remember-me">
                 <input type="checkbox" id="rememberMe">
                 <label for="rememberMe">Remember me</label>
+            </div>
+            <div class="show-password">
+                <input type="checkbox" id="showPassword">
+                <label for="showPassword">Show password</label>
             </div>
             <button type="submit" class="loginBtn">Login</button>
         </form>
