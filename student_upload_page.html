@@ -42,7 +42,7 @@
         }
 
         .file-upload input {
-            width: 100%;
+            width: 90%;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
@@ -65,11 +65,20 @@
         .buttons .confirm {
             background-color: #4CAF50;
             color: white;
+            margin-right: 10px;
+        }
+
+        .confirm:hover{
+            background-color: #2baa2f;
         }
 
         .buttons .cancel {
             background-color: #f44336;
             color: white;
+        }
+
+        .cancel:hover{
+            background-color: #fe1d0d;
         }
 
         .feedback {
@@ -91,6 +100,22 @@
             border-radius: 5px; 
             cursor: pointer;
         }
+
+        .downloadButton{
+            margin: 20px auto; 
+            display: block; 
+            padding: 10px 20px; 
+            background: #ffea00; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer;
+        }
+
+        .downloadButton:hover{
+            background-color: #ffe100;
+        }
+
         .backButton:hover{
             background-color: #00aeff;
         }
@@ -106,9 +131,9 @@
     </div>
     <div class="buttons">
         <button class="confirm" onclick="confirmUpload()">Confirm</button>
-        <button class="backButton" onclick="goBack()">Back</button>
         <button class="cancel" onclick="cancelUpload()">Cancel</button>
-        
+        <button class="downloadButton" onclick="downloadFile()">Download</button>
+        <button class="backButton" onclick="goBack()">Back</button>
     </div>
     <div class="feedback hidden" id="feedback"></div>
 </div>
@@ -116,12 +141,17 @@
 
 
 <script>
+    let isUploadConfirmed = false; 
+
     function confirmUpload() {
         const fileInput = document.getElementById('file');
         const feedback = document.getElementById('feedback');
+
+
         if (fileInput.files.length > 0) {
             feedback.textContent = `File "${fileInput.files[0].name}" uploaded successfully!`;
             feedback.classList.remove('hidden');
+            isUploadConfirmed = true;
         } else {
             feedback.textContent = "No file selected. Please choose a file to upload.";
             feedback.classList.remove('hidden');
@@ -131,10 +161,29 @@
     function cancelUpload() {
         const fileInput = document.getElementById('file');
         const feedback = document.getElementById('feedback');
-        fileInput.value = "";
-        feedback.textContent = "File upload canceled.";
-        feedback.classList.remove('hidden');
+        if (fileInput.files.length > 0 && isUploadConfirmed === true) {
+            fileInput.value = "";
+            feedback.textContent = "File upload canceled.";
+            feedback.classList.remove('hidden');
+        } else {
+            feedback.textContent = "No file uploaded. Please upload file first.";
+            feedback.classList.remove('hidden');
+        }
+
     }
+    function downloadFile() {
+        const fileInput = document.getElementById('file');
+        const feedback = document.getElementById('feedback');
+
+        if (fileInput.files.length > 0 && isUploadConfirmed === true) {
+            feedback.textContent = `File "${fileInput.files[0].name}" Downloaded on your PC successfully!`;
+            feedback.classList.remove('hidden');
+        } else {
+            feedback.textContent = "No file uploaded. Please upload file first.";
+            feedback.classList.remove('hidden');
+        }
+    }
+
     function goBack() {
         window.history.back();
     }
